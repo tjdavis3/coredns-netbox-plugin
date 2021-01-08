@@ -16,12 +16,12 @@ package netbox
 
 import (
 	"errors"
-	"github.com/coredns/coredns/core/dnsserver"
-	"github.com/coredns/coredns/plugin"
-	"github.com/coredns/coredns/plugin/metrics"
 	"time"
 
-	"github.com/caddyserver/caddy"
+	"github.com/coredns/coredns/core/dnsserver"
+	"github.com/coredns/coredns/plugin"
+
+	"github.com/coredns/caddy"
 )
 
 // init registers this plugin.
@@ -40,7 +40,7 @@ func setup(c *caddy.Controller) error {
 	// prometheus plugin has been used - if so we will export metrics. We can only register
 	// this metric once, hence the "once.Do".
 	c.OnStartup(func() error {
-		once.Do(func() { metrics.MustRegister(c, requestCount) })
+		// once.Do(func() { metrics.MustRegister(c, requestCount) })
 		return nil
 	})
 
